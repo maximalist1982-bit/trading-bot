@@ -1,4 +1,18 @@
 import asyncio
+import os
+from aiohttp import web
+
+# Создаем простой веб-сервер
+async def handle(request):
+    return web.Response(text="Bot is alive!")
+
+async def start_web_server():
+    app = web.Application()
+    app.router.add_get('/', handle)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, '0.0.0.0', int(os.environ.get('PORT', 10000)))
+    await site.start()
 import logging
 from datetime import datetime
 import yfinance as yf
