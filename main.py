@@ -107,8 +107,9 @@ async def cmd_signal(message: Message):
     await message.answer(signal_result, parse_mode="HTML")
 
 async def main():
+    logging.info("Запуск веб-сервера для Render...")
+    await start_web_server()  # <-- Добавляем эту строку
     logging.info("Бот запущен...")
     await dp.start_polling(bot)
-
 if __name__ == "__main__":
     asyncio.run(main())
